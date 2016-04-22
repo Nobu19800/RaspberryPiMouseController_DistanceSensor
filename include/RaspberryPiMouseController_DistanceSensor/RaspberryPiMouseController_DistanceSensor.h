@@ -47,7 +47,7 @@ using namespace RTC;
  * @brief Raspberry Pi Mouse Controller
  *
  * Raspberry Pi Mouseの制御RTC。
- * IRセンサで物体を検知すると回転して回避します。
+ * 距離センサで物体を検知すると回転して回避します。
  *
  */
 class RaspberryPiMouseController_DistanceSensor
@@ -239,7 +239,7 @@ class RaspberryPiMouseController_DistanceSensor
   // <rtc-template block="config_declare">
   /*!
    * 回避運動を開始する距離
-   * IRセンサの計測値がこのパラメータで設定した値以上になった場合に
+   * 距離センサの計測値がこのパラメータで設定した値以上になった場合に
    * 回避運動を開始する
    * - Name: sensor_limit sensor_limit
    * - DefaultValue: 10
@@ -272,13 +272,13 @@ class RaspberryPiMouseController_DistanceSensor
    * - Unit: m/s, rad/s
    */
   InPort<RTC::TimedVelocity2D> m_target_velocity_inIn;
-  RTC::TimedShortSeq m_ir_sensor;
+  RTC::TimedShortSeq m_distance_sensor;
   /*!
-   * IRセンサの計測値
+   * 距離センサの計測値
    * - Type: TimedShortSeq
    * - Number: 4
    */
-  InPort<RTC::TimedShortSeq> m_ir_sensorIn;
+  InPort<RTC::TimedShortSeq> m_distance_sensorIn;
   
   // </rtc-template>
 

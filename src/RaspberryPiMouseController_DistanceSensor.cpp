@@ -52,7 +52,7 @@ RaspberryPiMouseController_DistanceSensor::RaspberryPiMouseController_DistanceSe
     // <rtc-template block="initializer">
   : RTC::DataFlowComponentBase(manager),
     m_target_velocity_inIn("target_velocity_in", m_target_velocity_in),
-    m_ir_sensorIn("ir_sensor", m_ir_sensor),
+	m_distance_sensorIn("distance_sensor", m_distance_sensor),
     m_target_velocity_outOut("target_velocity_out", m_target_velocity_out)
 
     // </rtc-template>
@@ -74,7 +74,7 @@ RTC::ReturnCode_t RaspberryPiMouseController_DistanceSensor::onInitialize()
   // <rtc-template block="registration">
   // Set InPort buffers
   addInPort("target_velocity_in", m_target_velocity_inIn);
-  addInPort("ir_sensor", m_ir_sensorIn);
+  addInPort("distance_sensor", m_distance_sensorIn);
   
   // Set OutPort buffer
   addOutPort("target_velocity_out", m_target_velocity_outOut);
@@ -144,15 +144,15 @@ RTC::ReturnCode_t RaspberryPiMouseController_DistanceSensor::onDeactivated(RTC::
 
 RTC::ReturnCode_t RaspberryPiMouseController_DistanceSensor::onExecute(RTC::UniqueId ec_id)
 {
-	if (m_ir_sensorIn.isNew())
+	if (m_distance_sensorIn.isNew())
 	{
-		m_ir_sensorIn.read();
-		if (m_ir_sensor.data.length() >= 4)
+		m_distance_sensorIn.read();
+		if (m_distance_sensor.data.length() >= 4)
 		{
-			m_ir_sensor_r0 = m_ir_sensor.data[0];
-			m_ir_sensor_r1 = m_ir_sensor.data[1];
-			m_ir_sensor_l1 = m_ir_sensor.data[2];
-			m_ir_sensor_l0 = m_ir_sensor.data[3];
+			m_ir_sensor_r0 = m_distance_sensor.data[0];
+			m_ir_sensor_r1 = m_distance_sensor.data[1];
+			m_ir_sensor_l1 = m_distance_sensor.data[2];
+			m_ir_sensor_l0 = m_distance_sensor.data[3];
 		}
 
 	}
